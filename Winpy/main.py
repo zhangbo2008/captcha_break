@@ -1,3 +1,11 @@
+
+'''
+这个main.py就是最终的文件了!!!!!!!!!!!!!!!!!!!!!!!!!
+运行这个就够了.
+
+'''
+
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -16,7 +24,7 @@ from CaptchaDataset import CaptchaDataset
 from Model import Model
 from Utilss import train
 from Utilss import valid
-
+#n_len:表示的是一个图片中字符的个数.这里面是4,表示训练后的识别器只能识别一个图片中有4个字符的情况.如果不定长怎么办呢???????????????
 characters = '-' + string.digits + string.ascii_uppercase
 width, height, n_len, n_classes = 192, 64, 4, len(characters)#192 64
 n_input_length = 12
@@ -27,6 +35,9 @@ dataset = CaptchaDataset(characters, 1, width, height, n_input_length, n_len)
 image, target, input_length, label_length = dataset[0]
 print(''.join([characters[x] for x in target]), input_length, label_length)
 to_pil_image(image)
+
+
+#image: 3,64,192
 
 
 

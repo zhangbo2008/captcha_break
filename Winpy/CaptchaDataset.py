@@ -27,6 +27,9 @@ class CaptchaDataset(Dataset):
     
     def __getitem__(self, index):
         random_str = ''.join([random.choice(self.characters[1:]) for j in range(self.label_length)])
+
+
+        #所以调用这个函数,就会跑迭代器,得到image就是最后得到的图片.
         image = to_tensor(self.generator.generate_image(random_str))
         target = torch.tensor([self.characters.find(x) for x in random_str], dtype=torch.long)
         input_length = torch.full(size=(1, ), fill_value=self.input_length, dtype=torch.long)
