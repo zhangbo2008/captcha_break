@@ -8,6 +8,9 @@
     <orderEntry type="jdk" jdkName="Remote Python 3.6.7 (sftp://root@116.196.87.166:22/work/share/PyEnvs/zb/bin/python)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="PyDocumentationSettings">
+    <option name="renderExternalDocumentation" value="true" />
+  </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="pytest" />
     <option name="PROJECT_TEST_RUNNER" value="pytest" />
