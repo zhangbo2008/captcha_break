@@ -54,6 +54,16 @@ def decode(sequence):
 
 
 
-output_argmax = output.detach().permute(1, 0, 2).argmax(dim=-1)
+output_argmax = output.detach().permute(1, 0, 2).argmax(dim=-1)  # 1,12
+
+
+#因为预测的文字是4个的,而这里面输出的是12,所以个数不一样,需要用decode进行反编码后
+#的赛选.
+
+#这里面一个非常重要的没解决的问题是,训练时候指定了n_class=4,所以只能识别4个字符的,
+#如果多个怎么办呢?目前想到的是人为指定个数,训练多个权重,分别跑.
+#那么或者再加一个网络线判断图片中字符的个数是多少个!!!!!!!!!!!然后再接识别器.这个是目前最好的方法了!!!!!!!!!!
+#本模型需要cuda支持. 权重文件是ctc3.pth
+
 print('pred:', decode(output_argmax[0]))
 print('over')
