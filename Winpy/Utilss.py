@@ -33,13 +33,13 @@ def calc_acc(target, output,characters):
 
 
 def train(model, optimizer, epoch, dataloader,characters):
-    model.train()
+    model.train() #训练之前先写设置为训练模式.
     loss_mean = 0
     acc_mean = 0
     with tqdm(dataloader) as pbar:
         for batch_index, (data, target, input_lengths, target_lengths) in enumerate(pbar):
             data, target = data.cuda(), target.cuda()
-            
+            #data : 70,3,64,192
             optimizer.zero_grad()
             output = model(data)
             

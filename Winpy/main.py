@@ -51,8 +51,8 @@ valid_loader = DataLoader(valid_set, batch_size=batch_size, num_workers=2)
 
 model = Model(n_classes, input_shape=(3, height, width))
 inputs = torch.zeros((32, 3, height, width))
-outputs = model(inputs)
-outputs.shape
+
+
 
 model = Model(n_classes, input_shape=(3, height, width))
 model = model.cuda()

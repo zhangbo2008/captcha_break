@@ -36,7 +36,7 @@ class Model(nn.Module):
         modules[f'dropout'] = nn.Dropout(0.25, inplace=True)
         
         self.cnn = nn.Sequential(modules)
-        self.lstm = nn.LSTM(input_size=self.infer_features(), hidden_size=128, num_layers=2, bidirectional=True)
+        self.lstm = nn.LSTM(input_size=self.infer_features(), hidden_size=128, num_layers=2, bidirectional=True)#(seq_len, batch, input_size)
         self.fc = nn.Linear(in_features=256, out_features=n_classes)
     
     def infer_features(self):
@@ -46,9 +46,9 @@ class Model(nn.Module):
         return x.shape[1]
 
     def forward(self, x):
-        x = self.cnn(x)
-        x = x.reshape(x.shape[0], -1, x.shape[-1])
-        x = x.permute(2, 0, 1)
-        x, _ = self.lstm(x)
+        x = self.cnn(x) #70,3,64,192------70 256 2 12    70是batch_size一直不变. 64变成2 192变成 12 , 输出channel 从3 变成了256.
+        x = x.reshape(x.shape[0], -1, x.shape[-1])  # 70,512,12
+        x = x.permute(2, 0, 1) # 12,70,256
+        x, _ = self.lstm(x)# 12,70,256 # 注意pytorch 里面的输入是(seq_len, batch, input_size)  所以上一步需要进行permute操作.
         x = self.fc(x)
-        return x
+        return x  #12,70,37
